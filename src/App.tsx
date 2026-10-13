@@ -5,6 +5,10 @@ import logo from './logo.webp';
 
 const B = import.meta.env.BASE_URL;
 
+// Hero-1: видео с фолбэком на webp
+const HERO1_VIDEO = `${B}images/hero-1.mp4`;
+const HERO1_POSTER = `${B}images/hero-1.webp`;
+
 // Изображения для кейсов
 const CASE1_IMG = `${B}images/case-1.webp`;
 const CASE2_IMG = `${B}images/case-2.webp`;
@@ -92,6 +96,7 @@ export default function App() {
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [showLegal, setShowLegal] = useState(false);
   const [reviewIndex, setReviewIndex] = useState(0);
+  const [heroVideoFailed, setHeroVideoFailed] = useState(false);
 
   const servicesRef = useRef<HTMLElement>(null);
   const contactsRef = useRef<HTMLElement>(null);
@@ -263,7 +268,21 @@ export default function App() {
           </div>
 
           <section className="hero panel" id="top">
-            <img src={t.heroImages[titleIndex]} alt="" className="hero-bg-img" />
+            {titleIndex === 0 && !heroVideoFailed ? (
+              <video
+                className="hero-bg-img"
+                src={HERO1_VIDEO}
+                poster={HERO1_POSTER}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                onError={() => setHeroVideoFailed(true)}
+              />
+            ) : (
+              <img src={t.heroImages[titleIndex]} alt="" className="hero-bg-img" />
+            )}
             <div className="hero-overlay"></div>
             <h1 className={`hero-title ${titleAnimating ? 'hero-title-out' : 'hero-title-in'}`}>
               {t.heroTitles[titleIndex]}
