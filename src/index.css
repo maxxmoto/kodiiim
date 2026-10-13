@@ -1627,6 +1627,9 @@ textarea.field {
     padding: 10px 12px;
     gap: 8px;
   }
+  .logo {
+    margin-left: 16px;
+  }
   .logo img {
     height: 59px;
   }
